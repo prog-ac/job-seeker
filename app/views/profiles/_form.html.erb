@@ -1,29 +1,19 @@
-<%= form_with(model: profile, local: true) do |form| %>
-  <% if profile.errors.any? %>
+<%= nested_form_for @profile do |form| %>
+ <% if profile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
 
       <ul>
-        <% profile.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+      <% profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field" >
-    <%= form.label :name %>
-    <%= form.text_field :name, :class => 'form-control' %>
-  </div>
-
   <div class="field">
-    <%= form.label :thumbnail %>
-    <%= form.file_field :thumbnail %>
-  </div>
-
- <div class="field">
-    <%= form.label :is_enable %>
-    <%= form.check_box :is_enable %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
@@ -35,6 +25,77 @@
     <%= form.label :address %>
     <%= form.text_field :address %>
   </div>
+
+  <div class="field">
+    <%= form.label :is_enable %>
+    <%= form.check_box :is_enable %>
+  </div>
+
+  <div class="field">
+    <%= form.label :thumbnail %>
+    <%= form.file_field :thumbnail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :header_image %>
+    <%= form.text_field :header_image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :introduction %>
+    <%= form.text_field :introduction %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.hidden_field :user_id %>
+  </div>
+
+
+
+
+
+
+
+
+
+   <div calss = "article card"   style="width: 400px;">
+      <h3>article</h3>      <!--cellphone-->
+      <%= form.fields_for :articles do |f| %>
+        <%= f.hidden_field :user_id, :value => @profile.user_id %>
+        <%= f.hidden_field :profile_id, :value => @profile.id %>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+        <%= f.label :image %>
+        <%= f.text_field :image %>
+        <%= f.label :text %>
+        <%= f.text_field :text%>
+        <%= f.label :url %>
+        <%= f.text_field :url%>
+        <%= form.link_to_remove "削除" %>
+      <% end %>
+      <%= form.link_to_add "アプリ追加", :articles %>
+
+   </div>
+   <div calss = "career card"   style="width: 800px;">
+      <h3>career</h3>      <!--cellphone-->
+      <%= form.fields_for :careers do |f| %>
+        <%= f.hidden_field :user_id, :value => @profile.user_id %>
+        <%= f.hidden_field :profile_id, :value => @profile.id %>
+        <%= f.label :text %>
+        <%= f.text_field :text %>
+        <%= f.label :date %>
+        <%= f.date_field :date %>
+        <%= form.link_to_remove "削除" %>
+      <% end %>
+      <%= form.link_to_add "アプリ追加", :careers %>
+
+   </div>
+        
+
+
+
+
 
   <div class="actions">
     <%= form.submit %>

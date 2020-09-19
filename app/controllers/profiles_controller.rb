@@ -14,13 +14,15 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
-    @profile = Profile.find_or_create_by(:id => current_user.id)
+    @profile = Profile.find_or_create_by(:user_id => current_user.id)
+    @profile.articles.build
+    @profile.careers.build
     redirect_to edit_profile_url(@profile)
-    
   end
 
   # GET /profiles/1/edit
   def edit
+    
   end
 
   # POST /profiles
@@ -63,6 +65,7 @@ class ProfilesController < ApplicationController
   #   end
   # end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
@@ -71,6 +74,9 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:name, :birthday, :address, :is_enable, :thumbnail)
+      params.require(:profile).permit(:name, :birthday, :address, :is_enable, :thumbnail, :header_image, :introduction, :user_id, articles_attributes:  [:profile_id, :user_id, :title, :type, :image, :text, :url, :date, :_destroy, :id ], careers_attributes:[:date, :text, :user_id, :profile_id, :_destroy, :id ]
+      )
     end
 end
+
+

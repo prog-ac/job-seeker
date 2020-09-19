@@ -16,7 +16,12 @@ class ProfilesTest < ApplicationSystemTestCase
 
     fill_in "Address", with: @profile.address
     fill_in "Birthday", with: @profile.birthday
+    fill_in "Header image", with: @profile.header_image
+    fill_in "Introduction", with: @profile.introduction
+    check "Is enable" if @profile.is_enable
     fill_in "Name", with: @profile.name
+    fill_in "Thumbnail", with: @profile.thumbnail
+    fill_in "User", with: @profile.user_id
     click_on "Create Profile"
 
     assert_text "Profile was successfully created"
@@ -29,7 +34,12 @@ class ProfilesTest < ApplicationSystemTestCase
 
     fill_in "Address", with: @profile.address
     fill_in "Birthday", with: @profile.birthday
+    fill_in "Header image", with: @profile.header_image
+    fill_in "Introduction", with: @profile.introduction
+    check "Is enable" if @profile.is_enable
     fill_in "Name", with: @profile.name
+    fill_in "Thumbnail", with: @profile.thumbnail
+    fill_in "User", with: @profile.user_id
     click_on "Update Profile"
 
     assert_text "Profile was successfully updated"
