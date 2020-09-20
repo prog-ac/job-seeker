@@ -48,6 +48,9 @@ class ProfilesController < ApplicationController
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
+        @profiles = Profile.where(:is_enable => true)
+        profiles_json = render_to_string(template:'profiles/index.json.jbuilder')
+        ProfilesHelper.upload_to_s3(profiles_json)
       else
         format.html { render :edit }
         format.json { render json: @profile.errors, status: :unprocessable_entity }

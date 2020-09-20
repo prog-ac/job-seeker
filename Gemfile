@@ -27,6 +27,7 @@ gem 'carrierwave'
 gem 'fog'
 gem "nested_form"
 gem 'jquery-rails'
+gem 'aws-sdk'
  
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
