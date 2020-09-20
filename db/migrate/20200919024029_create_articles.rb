@@ -1,4 +1,4 @@
-class CreateArticles < ActiveRecord::Migration[6.0]
+class CreateArticles < ActiveRecord::Migration[5.2]
   def change
     create_table :articles do |t|
       t.string :title
@@ -7,6 +7,9 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string :url
       t.string :type
       t.date :date
+      t.integer :user_id
+      t.integer :profile_id
+
       t.timestamps
     end
   end
