@@ -1,62 +1,48 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>image:</strong>
-  <%= image_tag @profile.thumbnail.to_s %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @profile.birthday %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @profile.address %>
-</p>
-
-<p>
-  <strong>Is enable:</strong>
-  <%= @profile.is_enable %>
-</p>
-
-<p>
-  <strong>Thumbnail:</strong>
-  <%= @profile.thumbnail %>
-</p>
-
-<p>
-  <strong>Header image:</strong>
-  <%= @profile.header_image %>
-</p>
-
-<p>
-  <strong>Introduction:</strong>
-  <%= @profile.introduction %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @profile.user_id %>
-</p>
-
-<div class="article card" style="width: 400px;">
-      <h3>article</h3>
-      <% @profile.articles.each do |article| %>
-        <%= article.title %>
-      <% end %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Name:</strong>
+    <%= @profile.name %>
+  </p>
+  <p>
+    <strong>image:</strong>
+    <%= image_tag @profile.thumbnail.to_s %>
+  </p>
+  <p>
+    <strong>Birthday:</strong>
+    <%= @profile.birthday %>
+  </p>
+  <p>
+    <strong>Address:</strong>
+    <%= @profile.address %>
+  </p>
+  <p>
+    <strong>Is enable:</strong>
+    <%= @profile.is_enable %>
+  </p>
+  <p>
+    <strong>Thumbnail:</strong>
+    <%= @profile.thumbnail %>
+  </p>
+  <p>
+    <strong>Introduction:</strong>
+    <%= @profile.introduction %>
+  </p>
+  <p>
+    <strong>User:</strong>
+    <%= @profile.user_id %>
+  </p>
+  <div class="article card" style="width: 400px;">
+    <h3>article</h3>
+    <% @profile.articles.each do |article| %>
+      <%= article.title %>
+    <% end %>
+  </div>
+  <div class="career card" style="width: 800px;">
+    <h3>career</h3>
+    <% @profile.careers.each do |career| %>
+    <% end %>
+  </div>
+  <%= link_to "Edit", edit_profile_path(@profile) %> |
+  <%= link_to "Back", profiles_path %>
 </div>
-
-<div class="career card" style="width: 800px;">
-      <h3>career</h3>
-      <% @profile.careers.each do |career| %>
-      <% end %>
-</div>
-
-<%= link_to "Edit", edit_profile_path(@profile) %> |
-<%= link_to "Back", profiles_path %>

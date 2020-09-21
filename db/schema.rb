@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_09_19_024029) do
     t.string "image"
     t.string "text"
     t.string "url"
-    t.string "type"
+    t.string "category"
     t.date "date"
     t.integer "user_id"
     t.integer "profile_id"
