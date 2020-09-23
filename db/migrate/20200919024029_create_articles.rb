@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration[5.2]
       t.string :image
       t.string :text
       t.string :url
-      t.string :type
+      t.string :category
       t.date :date
       t.integer :user_id
       t.integer :profile_id

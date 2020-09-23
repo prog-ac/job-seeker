@@ -1,62 +1,57 @@
-<p id="notice"><%= notice %></p>
+<div class="container border-primary">
+<h1>プロフィール</h1>
+    <%= image_tag @profile.thumbnail.to_s, :size =>'220x220' %>
 
-<p>
-  <strong>image:</strong>
-  <%= image_tag @profile.thumbnail.to_s %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @profile.birthday %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @profile.address %>
-</p>
-
-<p>
-  <strong>Is enable:</strong>
-  <%= @profile.is_enable %>
-</p>
-
-<p>
-  <strong>Thumbnail:</strong>
-  <%= @profile.thumbnail %>
-</p>
-
-<p>
-  <strong>Header image:</strong>
-  <%= @profile.header_image %>
-</p>
-
-<p>
-  <strong>Introduction:</strong>
-  <%= @profile.introduction %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @profile.user_id %>
-</p>
-
-<div class="article card" style="width: 400px;">
-      <h3>article</h3>
-      <% @profile.articles.each do |article| %>
-        <%= article.title %>
-      <% end %>
+<div class=”form-group”>
+  <p class="border-primary border-bottom mt-4">
+    <strong>名前:</strong>
+    <%= @profile.name %>
+  </p>
+  <p class="border-primary border-bottom mt-4">
+    <strong>誕生日:</strong>
+    <%= @profile.birthday %>
+  </p>
+  <p class="border-primary border-bottom mt-4">
+    <strong>住所:</strong>
+    <%= @profile.address %>
+  </p>
+  <p class="border-primary border-bottom mt-4">
+    <strong>Is enable:</strong>
+    <%= @profile.is_enable %>
+  </p>
+  <div class="form-group">
+  <p class="border-primary border-bottom mt-4">
+    <strong>自己紹介:</strong>
+      <br />
+    <%= @profile.introduction %>
+  </p>
+  </div>
+  <div class="border-primary  border-bottom">
+  <strong >記事:</strong>
+    <% @profile.articles.each do |article| %>
+    <div class="card border-primary mb-3" style="width:45rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= ProfilesHelper.article_category_value_to_key(article.category)%></h5>
+      <h6 class="card-subtitle text-muted"><%= article.title %></h6>
+      <br />
+      <p class="card-text"><%= article.text %></p>
+      </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="border-primary  border-bottom mt-4">
+  <strong>経歴:</strong>
+  <div>
+    <% @profile.careers.each do |career| %>
+      <%= career.date %>
+      <%= career.text %>
+      <br />
+    <% end %>
+  </div>
+  </div>
+  <div class="mt-4">
+  <%= link_to "Edit", edit_profile_path(@profile) %> |
+  <%= link_to "Back", profiles_path %>
+  </div>
 </div>
-
-<div class="career card" style="width: 800px;">
-      <h3>career</h3>
-      <% @profile.careers.each do |career| %>
-      <% end %>
 </div>
-
-<%= link_to "Edit", edit_profile_path(@profile) %> |
-<%= link_to "Back", profiles_path %>

@@ -1,103 +1,77 @@
-<%= nested_form_for @profile do |form| %>
- <% if profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+<div class="container">
+  <%= nested_form_for @profile do |form| %>
+  <% if profile.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(profile.errors.count, "error") %> prohibited this profile
+      from being saved:
+    </h2>
 
-      <ul>
+    <ul>
       <% profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
+  <%= form.hidden_field :user_id %>
+  <div class="card input-group border-Secondary mt-4">
+    <div class="card-header border-Secondary">基本情報</div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <div class="card-body">
+      <%= form.check_box :is_enable %>
+      <span>公開する</span>
+      <h5 class="mt-3">名前</h5>
+      <%= form.text_field :name, :size=>"40", :class => 'form-control' %>
+      <h5 class="mt-4">生年月日</h5>
+      <%= form.date_select :birthday%>
+
+      <h5 class="mt-4">住所</h5>
+      <%= form.text_area :address,:size => "70x3", :class => 'form-control'  %>
+
+      <h5 class="mt-4">プロフィール画像</h5>
+      <%= form.file_field :thumbnail  %>
+
+      <h5 class="mt-4">自己紹介</h5>
+      <%= form.text_area :introduction,:size => "70x9", :class => 'form-control'  %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :birthday %>
-    <%= form.date_select :birthday %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_enable %>
-    <%= form.check_box :is_enable %>
-  </div>
-
-  <div class="field">
-    <%= form.label :thumbnail %>
-    <%= form.file_field :thumbnail %>
-  </div>
-
-  <div class="field">
-    <%= form.label :header_image %>
-    <%= form.text_field :header_image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :introduction %>
-    <%= form.text_field :introduction %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.hidden_field :user_id %>
-  </div>
-
-
-
-
-
-
-
-
-
-   <div calss = "article card"   style="width: 400px;">
-      <h3>article</h3>      <!--cellphone-->
+  <div class="card input-group border-Secondary">
+    <div class="card-header border-Secondary">
+      <h3>記事</h3>
+      <span>(ご自由にご記載ください。)</span>
+    </div>
+    <div class="card-body">
       <%= form.fields_for :articles do |f| %>
-        <%= f.hidden_field :user_id, :value => @profile.user_id %>
-        <%= f.hidden_field :profile_id, :value => @profile.id %>
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-        <%= f.label :image %>
-        <%= f.text_field :image %>
-        <%= f.label :text %>
-        <%= f.text_field :text%>
-        <%= f.label :url %>
-        <%= f.text_field :url%>
-        <%= form.link_to_remove "削除" %>
+      <%= f.hidden_field :user_id, :value => @profile.user_id %>
+      <%= f.hidden_field :profile_id, :value => @profile.id %>
+      <%= f.select :category, ProfilesHelper.ARTICLE_CATEGORY %><br />
+      <div class="mt-4"><%= f.label :タイトル%></div>
+      <div class="mt-3"><%= f.text_field :title, :size => "50" %></div>
+       <br />
+      <%= f.label :詳細 %>
+      <%= f.text_area :text,:size => "70x4", :class => 'form-control'%>
+      <div class="mt-3 mb-4"><%= f.link_to_remove "削除" %></div>
       <% end %>
-      <%= form.link_to_add "アプリ追加", :articles %>
-
-   </div>
-   <div calss = "career card"   style="width: 800px;">
-      <h3>career</h3>      <!--cellphone-->
-      <%= form.fields_for :careers do |f| %>
-        <%= f.hidden_field :user_id, :value => @profile.user_id %>
-        <%= f.hidden_field :profile_id, :value => @profile.id %>
-        <%= f.label :text %>
-        <%= f.text_field :text %>
-        <%= f.label :date %>
-        <%= f.date_field :date %>
-        <%= form.link_to_remove "削除" %>
-      <% end %>
-      <%= form.link_to_add "アプリ追加", :careers %>
-
-   </div>
-        
-
-
-
-
-
-  <div class="actions">
-    <%= form.submit %>
+      <%= form.link_to_add "記事追加", :articles %>
+    </div>
   </div>
-<% end %>
+  <div class="card border-Secondary">
+    <div class="card-header input-group border-Secondary">
+      <h3>経歴</h3>
+    </div>
+    <div class="card-body">
+      <%= form.fields_for :careers do |f| %>
+      <%= f.hidden_field :user_id, :value => @profile.user_id %>
+      <%= f.hidden_field :profile_id, :value => @profile.id %>
+      <%= f.text_field :text, :size => "50" %>
+      <%= f.label :date %>
+      <%= f.date_field :date %>
+      <%= f.link_to_remove "削除" %>
+      <% end %>
+      <%= form.link_to_add "経歴追加", :careers %>
+    </div>
+    <div class="actions"><%= form.submit %></div>
+  </div>
+  <% end %>
+</div>

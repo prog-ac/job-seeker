@@ -5,4 +5,11 @@ module ProfilesHelper
     ) 
     client.put_object(bucket:Rails.application.credentials.aws[:bucket], key:'master.json', body:data)
   end
+  def self.ARTICLE_CATEGORY
+    return {'ポートフォリオ':'p','受賞歴':'j', '資格':'s'}
+  end
+  def self.article_category_value_to_key(val)
+    category = ProfilesHelper.ARTICLE_CATEGORY.find {|k,v| v == val}
+    category[0]
+  end
 end

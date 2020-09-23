@@ -28,7 +28,9 @@ gem 'fog'
 gem "nested_form"
 gem 'jquery-rails'
 gem 'aws-sdk'
- 
+gem 'bootstrap', '~> 4.1.1'
+gem 'htmlbeautifier'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

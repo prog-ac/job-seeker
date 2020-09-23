@@ -1,10 +1,11 @@
+
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = Profile.where(:is_enable => true)
   end
 
   # GET /profiles/1
@@ -14,6 +15,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
+    @profile = Profile
     @profile = Profile.find_or_create_by(:user_id => current_user.id)
     @profile.articles.build
     @profile.careers.build
@@ -22,24 +24,27 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    
+    if  @profile.user_id != current_user.id
+      raise ActionController::RoutingError.new('Not authorized')
+    end
   end
 
   # POST /profiles
   # POST /profiles.json
-  # def create
-  #   @profile = Profile.new(profile_params)
+  def create
+    @profile = Profile.new(profile_params)
+    # @profile.save!
 
-  #   respond_to do |format|
-  #     if @profile.save
-  #       format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
-  #       format.json { render :show, status: :created, location: @profile }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @profile.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    # respond_to do |format|
+    #   if @profile.save
+    #     format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+    #     format.json { render :show, status: :created, location: @profile }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @profile.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
 
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
@@ -77,7 +82,7 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:name, :birthday, :address, :is_enable, :thumbnail, :header_image, :introduction, :user_id, articles_attributes:  [:profile_id, :user_id, :title, :type, :image, :text, :url, :date, :_destroy, :id ], careers_attributes:[:date, :text, :user_id, :profile_id, :_destroy, :id ]
+      params.require(:profile).permit(:name, :birthday, :address, :is_enable, :thumbnail, :header_image, :introduction, :user_id, articles_attributes:  [:profile_id, :user_id, :title, :category, :image, :text, :url, :date, :_destroy, :id ], careers_attributes:[:date, :text, :user_id, :profile_id, :_destroy, :id ]
       )
     end
 end
