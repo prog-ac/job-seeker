@@ -1,15 +1,14 @@
-<div class="text-center">
-<h1 class="text-center border-bottom", style="font-size:80px;">サインアップ</h1>
-
+<div class="container">
+<div class="card border-Secondary" style="width: 40rem; height: 24rem;">
+<h1 class="card-header border-Secondary">サインアップ</h1>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field mail">
+  
+  <div class="field ">
     <%= f.label :Eメール %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", :size=>"40" %>
   </div>
 
-  <div class="field mail">
+  <div class="field ">
     <%= f.label :パスワード %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
@@ -17,16 +16,19 @@
     <%= f.password_field :password, autocomplete: "new-password", :size=>"40" %>
   </div>
 
-  <div class="field mail">
+  <div class="field ">
     <%= f.label :パスワード %>
     <em>(確認用)</em><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", :size=>"40" %>
   </div>
 
-  <div class="actions">
+  <div class="actions mt-3">
     <%= f.submit "サインアップ" %>
+    <br />
+    <div class="text-white mt-4"><button type="button" class="btn text-white"><%= render "devise/shared/links", :style=>"color:white;" %></button></div>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+<%= render "devise/shared/error_messages", resource: resource %>
 </div>
+</div>
+
