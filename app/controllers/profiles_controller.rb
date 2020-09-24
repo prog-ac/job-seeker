@@ -20,8 +20,8 @@ class ProfilesController < ApplicationController
   end
   # GET /profiles/1/edit
   def edit
-    if  @profile.user_id != current_user.id
-      raise ActionController::RoutingError.new('Not authorized')
+    if @profile.user_id != current_user.id
+      raise ActionController::RoutingError.new("Not authorized")
     end
   end
   # POST /profiles
@@ -44,16 +44,16 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to @profile, notice: "Profile was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
         @profiles = Profile.where(:is_enable => true)
-        profiles_json = render_to_string(template:'profiles/index.json.jbuilder')
-        if Rails.env == 'development'
-          key = 'dev-master.json'
+        profiles_json = render_to_string(template: "profiles/index.json.jbuilder")
+        if Rails.env == "development"
+          key = "dev-master.json"
         else
-          key = 'master.json'
-        end 
-        ProfilesHelper.upload_to_s3(key,profiles_json)
+          key = "master.json"
+        end
+        ProfilesHelper.upload_to_s3(key, profiles_json)
       else
         format.html { render :edit }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
@@ -70,13 +70,12 @@ class ProfilesController < ApplicationController
   #   end
   # end
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile
-      @profile = Profile.find(params[:id])
-    end
-    # Only allow a list of trusted parameters through.
-    def profile_params
-      params.require(:profile).permit(:name, :birthday, :address, :is_enable, :thumbnail, :header_image, :introduction, :user_id, articles_attributes:  [:profile_id, :user_id, :title, :category, :image, :text, :url, :date, :_destroy, :id ], careers_attributes:[:date, :text, :user_id, :profile_id, :_destroy, :id ]
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile
+    @profile = Profile.find(params[:id])
+  end
+  # Only allow a list of trusted parameters through.
+  def profile_params
+    params.require(:profile).permit(:name, :birthday, :address, :is_enable, :thumbnail, :header_image, :introduction, :user_id, articles_attributes: [:profile_id, :user_id, :title, :category, :image, :text, :url, :date, :_destroy, :id], careers_attributes: [:date, :text, :user_id, :profile_id, :_destroy, :id])
+  end
 end
