@@ -1,7 +1,3 @@
-
-<p id="notice"><%= notice %></p>
-
-
 <div class="text-right mr-5 mb-2">
 <button type="button" class="btn btn-primary mr-3"><%= link_to 'New Profile', new_profile_path, :style=>"color:white;"%></button>
 <button type="button" class="btn btn-danger mr-5"><%= link_to 'LOGOUT', destroy_user_session_path, method: :delete, :style=>"color:white;"%></button>
@@ -27,9 +23,6 @@
         <td><%= profile.address %></td>
         <td><%= profile.is_enable %></td>
         <td><button type="button" class="btn btn-success"><%= link_to 'Show', profile, :style=>"color:white;"%></button></td>
-        
-               
-
       </tr>
     <% end %>
   </tbody>

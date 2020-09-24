@@ -2,5 +2,7 @@
 
 <%= render 'form', profile: @profile %>
 
-<%= link_to 'Show', @profile %> 
-<%= link_to 'Back', profiles_path %>
+<div class="text-center ">
+<button type="button" class="btn btn-warning"><%= link_to 'Show', @profile, :style=>"color:white;" %></button>
+<button type="button" class="btn btn-info"><%= link_to 'Back', profiles_path, :style=>"color:white;" %></button>
+</div>
