@@ -31,6 +31,14 @@ gem 'aws-sdk'
 gem 'bootstrap', '~> 4.1.1'
 gem 'htmlbeautifier'
 
+
+group :development, :test do
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+end
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
