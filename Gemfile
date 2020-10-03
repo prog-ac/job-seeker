@@ -32,7 +32,7 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'htmlbeautifier'
 
 
-group :development, :test do
+group :development do
   gem 'sqlite3'
 end
 group :production do
